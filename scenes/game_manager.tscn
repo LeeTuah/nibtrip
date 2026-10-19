@@ -5,6 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://dgsxqi57kbn84" path="res://assets/tiles/table.png" id="2_udu3i"]
 [ext_resource type="Texture2D" uid="uid://t6kc6fdaham4" path="res://assets/cursor/back/back20.png" id="4_oo155"]
 [ext_resource type="Texture2D" uid="uid://dmvctxj0pwj61" path="res://assets/cursor/back/back12.png" id="5_eaq8r"]
+[ext_resource type="PackedScene" uid="uid://b4ntfyc0bkdxp" path="res://scenes/enemy.tscn" id="6_ternb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ob1uy"]
+size = Vector2(446, 253)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oo155"]
 texture = ExtResource("2_udu3i")
@@ -23,22 +27,32 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_oo155")
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ob1uy"]
+
 [node name="game_manager" type="Node2D" unique_id=1180671965]
 script = ExtResource("1_hwd4i")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1945992529]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1556706897]
+z_index = 2
+position = Vector2(159, 95.5)
+shape = SubResource("RectangleShape2D_ob1uy")
 
 [node name="table_foreground" type="TileMapLayer" parent="." unique_id=837054284]
 tile_map_data = PackedByteArray("AAABAAIAAAAIAAEAAAACAAIAAAAIAAEAAAADAAIAAAAIAAEAAAAEAAIAAAAIAAEAAAAFAAIAAAAIAAEAAAAGAAIAAAAIAAEAAAAHAAIAAAAIAAEAAAAIAAIAAAAIAAEAAAAJAAIAAAAIAAEAAAAJAAMAAAAIAAEAAAAIAAMAAAAIAAEAAAAHAAMAAAAIAAEAAAAGAAMAAAAIAAEAAAAFAAMAAAAIAAEAAAAEAAMAAAAIAAEAAAADAAMAAAAIAAEAAAACAAMAAAAIAAEAAAABAAMAAAAIAAEAAAABAAUAAAAIAAEAAAACAAUAAAAIAAEAAAADAAUAAAAIAAEAAAAEAAUAAAAIAAEAAAAFAAUAAAAIAAEAAAAGAAUAAAAIAAEAAAAHAAUAAAAIAAEAAAAIAAUAAAAIAAEAAAAJAAUAAAAIAAEAAAABAAYAAAAEAAEAACACAAYAAAAGAAEAACADAAYAAAAGAAEAACAEAAYAAAAGAAEAACAFAAYAAAAGAAEAACAGAAYAAAAGAAEAACAHAAYAAAAGAAEAACAIAAYAAAAGAAEAACAJAAYAAAAEAAEAADABAAQAAAAIAAEAAAACAAQAAAAIAAEAAAADAAQAAAAIAAEAAAAEAAQAAAAIAAEAAAAFAAQAAAAIAAEAAAAGAAQAAAAIAAEAAAAHAAQAAAAIAAEAAAAIAAQAAAAIAAEAAAAJAAQAAAAIAAEAAAD+/wMAAAAGAAEAAED+/wQAAAAGAAEAAGD+/wUAAAAEAAEAAGD+/wYAAAABAAAAAGD+////AAABAAAAAAALAP//AAABAAAAAFALAAYAAAABAAAAAHALAAUAAAAEAAEAAHALAAQAAAAGAAEAAHALAAMAAAAGAAEAAHALAAAAAAAEAAEAAFD+/wAAAAAEAAEAAED/////AAAEAAEAAAAKAP//AAAEAAEAABAAAP//AAAGAAEAAAABAP//AAAGAAEAAAACAP//AAAGAAEAAAADAP//AAAGAAEAAAAEAP//AAAGAAEAAAAFAP//AAAGAAEAAAAGAP//AAAGAAEAAAAHAP//AAAGAAEAAAAIAP//AAAGAAEAAAAJAP//AAAGAAEAAAALAAEAAAAGAAEAAFALAAIAAAAGAAEAAFD+/wEAAAAGAAEAAED+/wIAAAAGAAEAAED//wYAAAAGAAEAADAAAAYAAAAGAAEAADAKAAYAAAAGAAEAADD//wAAAAAIAAEAAAD//wEAAAAIAAEAAAD//wIAAAAIAAEAAAD//wMAAAAIAAEAAAD//wQAAAAIAAEAAAD//wUAAAAIAAEAAAAAAAAAAAAIAAEAAAAAAAEAAAAIAAEAAAAAAAIAAAAIAAEAAAAAAAMAAAAIAAEAAAAAAAQAAAAIAAEAAAAAAAUAAAAIAAEAAAABAAAAAAAIAAEAAAABAAEAAAAIAAEAAAACAAAAAAAIAAEAAAACAAEAAAAIAAEAAAADAAAAAAAIAAEAAAADAAEAAAAIAAEAAAAEAAAAAAAIAAEAAAAEAAEAAAAIAAEAAAAFAAAAAAAIAAEAAAAFAAEAAAAIAAEAAAAGAAAAAAAIAAEAAAAGAAEAAAAIAAEAAAAHAAAAAAAIAAEAAAAHAAEAAAAIAAEAAAAIAAAAAAAIAAEAAAAIAAEAAAAIAAEAAAAJAAAAAAAIAAEAAAAJAAEAAAAIAAEAAAAKAAAAAAAIAAEAAAAKAAEAAAAIAAEAAAAKAAIAAAAIAAEAAAAKAAMAAAAIAAEAAAAKAAQAAAAIAAEAAAAKAAUAAAAIAAEAAAA=")
 tile_set = SubResource("TileSet_glms7")
 
 [node name="player" parent="." unique_id=215573986 instance=ExtResource("2_glms7")]
-position = Vector2(162, 72)
+position = Vector2(237, 81)
 
 [node name="camera" type="Camera2D" parent="." unique_id=337306854]
 position = Vector2(160, 90)
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.5, 0.5)
 limit_enabled = false
 
 [node name="cursor" type="Node2D" parent="." unique_id=171151063]
+z_index = 4096
 
 [node name="default" type="Sprite2D" parent="cursor" unique_id=1749685476]
 visible = false
@@ -49,3 +63,34 @@ texture = ExtResource("4_oo155")
 visible = false
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("5_eaq8r")
+
+[node name="enemy" parent="." unique_id=1083216913 instance=ExtResource("6_ternb")]
+position = Vector2(76, 147)
+
+[node name="Corners" type="Node2D" parent="." unique_id=1048855107]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Corners" unique_id=811123324]
+physics_material_override = SubResource("PhysicsMaterial_ob1uy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Corners/StaticBody2D" unique_id=375223360]
+polygon = PackedVector2Array(352, -29, 380, -2, 370, -19)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Corners" unique_id=914169482]
+physics_material_override = SubResource("PhysicsMaterial_ob1uy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Corners/StaticBody2D2" unique_id=833494141]
+polygon = PackedVector2Array(-31, -31, -62, 1, -50, -19)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Corners" unique_id=1815299080]
+physics_material_override = SubResource("PhysicsMaterial_ob1uy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Corners/StaticBody2D3" unique_id=121731314]
+polygon = PackedVector2Array(-63, 190, -51, 213, -33, 222)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Corners" unique_id=956175643]
+physics_material_override = SubResource("PhysicsMaterial_ob1uy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Corners/StaticBody2D4" unique_id=1926364062]
+polygon = PackedVector2Array(353, 221, 381, 195, 371, 213)
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

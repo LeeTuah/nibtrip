@@ -11,3 +11,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	$cursor.global_position = get_global_mouse_position();
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.has_method("pen_falling"):
+		body.pen_falling()
