@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dw2t6m1bg1vq3" path="res://scripts/game_manager.gd" id="1_hwd4i"]
 [ext_resource type="PackedScene" uid="uid://c6wp5p3ycgdby" path="res://scenes/player.tscn" id="2_glms7"]
 [ext_resource type="Texture2D" uid="uid://dgsxqi57kbn84" path="res://assets/tiles/table.png" id="2_udu3i"]
+[ext_resource type="Texture2D" uid="uid://t6kc6fdaham4" path="res://assets/cursor/back/back20.png" id="4_oo155"]
+[ext_resource type="Texture2D" uid="uid://dmvctxj0pwj61" path="res://assets/cursor/back/back12.png" id="5_eaq8r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oo155"]
 texture = ExtResource("2_udu3i")
@@ -31,7 +33,19 @@ tile_set = SubResource("TileSet_glms7")
 [node name="player" parent="." unique_id=215573986 instance=ExtResource("2_glms7")]
 position = Vector2(162, 72)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=337306854]
+[node name="camera" type="Camera2D" parent="." unique_id=337306854]
 position = Vector2(160, 90)
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.6, 0.6)
 limit_enabled = false
+
+[node name="cursor" type="Node2D" parent="." unique_id=171151063]
+
+[node name="default" type="Sprite2D" parent="cursor" unique_id=1749685476]
+visible = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_oo155")
+
+[node name="grab" type="Sprite2D" parent="cursor" unique_id=1852491776]
+visible = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_eaq8r")
